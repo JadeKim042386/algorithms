@@ -6,6 +6,7 @@ class Node:
     def __repr__(self) -> str:
         return f"Node({self.data})"
     
+    
 class LinkedList:
     def __init__(self) -> None:
         self.head = None
@@ -23,7 +24,7 @@ class LinkedList:
         if not 0 <= index < len(self):
             raise ValueError("list index out of range")
         for i, node in enumerate(self):
-            if i == node:
+            if i == index:
                 return node
         return None
     
@@ -56,7 +57,7 @@ class LinkedList:
             self.head = new_node
         else:
             temp = self.head
-            for _ in range(len(self) - 1):
+            for _ in range(index - 1):
                 temp = temp.next
             new_node.next = temp.next
             temp.next = new_node
