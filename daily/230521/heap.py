@@ -47,7 +47,7 @@ class Heap:
         if self.heap_size >= 1:
             return self.h[0]
         else:
-            raise Exception("Empty heap")
+            raise Exception("empty heap")
     
     def extract_max(self):
         if self.heap_size >= 2:
@@ -60,8 +60,8 @@ class Heap:
             self.heap_size -= 1
             return self.h.pop(-1)
         else:
-            raise Exception("Empty heap")
-    
+            raise Exception("empty heap")
+        
     def insert(self, value):
         self.h.append(value)
         idx = (self.heap_size - 1) // 2
@@ -69,7 +69,7 @@ class Heap:
         while idx >= 0:
             self.max_heapify(idx)
             idx = (idx - 1) // 2
-        
+    
     def heap_sort(self):
         size = self.heap_size
         for i in range(size - 1, 0, -1):
@@ -77,3 +77,4 @@ class Heap:
             self.heap_size -= 1
             self.max_heapify(0)
         self.heap_size = size
+            
