@@ -22,8 +22,8 @@ class Node:
         self.f_cost = self.calculate_heuristic()
     
     def calculate_heuristic(self):
-        dx = abs(self.pos_x - self.goal_x)
-        dy = abs(self.pos_y - self.goal_y)
+        dx = abs(self.goal_x - self.pos_x)
+        dy = abs(self.goal_y - self.pos_y)
         return dx + dy
     
     def __lt__(self, other):
@@ -63,24 +63,21 @@ class GreedyBestFirst:
                         self.open_nodes.append(child_node)
                     else:
                         self.open_nodes.append(better_node)
-                        
+        
         if not self.reached:
             return [self.start.pos]
-        
+    
     def get_successors(self, parent):
         successors = []
         for action in delta:
             pos_x = parent.pos_x + action[1]
             pos_y = parent.pos_y + action[0]
 
-            if 0 <= pos_x <= len(grid[0]) - 1 \
-                and 0 <= pos_y < len(grid) - 1 \
-                and grid[pos_y][pos_x] == 0:
-
+            if 0 <= pos_x <= len(grid[0]) - 1 and 0 <= pos_y <= len(grid) - 1 and grid[pos_y][pos_x] == 0:
                 successors.append(Node(pos_x, pos_y, self.target.pos_y, self.target.pos_x, parent.g_cost + 1, parent))
 
         return successors
-
+    
     def retrace_path(self, node):
         current_node = node
         path = []
